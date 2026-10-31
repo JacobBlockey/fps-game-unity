@@ -1,34 +1,66 @@
 # Unity .gitignore
 
-[Library/
-[Temp/
-[Obj/
-[Build/
-[Builds/
-[Logs/
-[MemoryCaptures/
-[PlaybackSettings.asset
+# Unity generated folders
+Library/
+Temp/
+Obj/
+Build/
+Builds/
+Logs/
+MemoryCaptures/
+UserSettings/
+
+# Unity generated files
 *.csproj
 *.unityproj
-*.sw9
 *.sln
 *.suo
 *.tmp
 *.user
 *.user_settings
 *.vmcs
-[.vs/
-.idea/
-.SX1000]
-\*.unityfiles
-\*.unityprefs
-\*.unity_cache
-\*.unity_cache_info
+*.apk
+*.aab
+*.unitypackage
+*.app
+*.swp
 
-# Asset-specific files to ignore (optional but recommended)
-[Assets/*\?\.meta]
+# IDE
+.vs/
+.vscode/
+.idea/
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+
+# OS generated
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
 
 # Environment & secrets
 .env
 .env.local
 .env.*.local
+
+# Unity logs
+*.log
+unity_*.log
+
+# Unity build output
+Build/
+
+# Blender exports
+exports/
+
+# Crash reports
+sysinfo.txt
+crashlytics-build.properties

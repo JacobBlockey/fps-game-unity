@@ -34,7 +34,7 @@ namespace ZONE.AI
         private NavMeshAgent _agent;
         private AIState _currentState = AIState.Idle;
         private Transform _currentTarget;
-        private Vector3 _lastKnownTargetPosition;
+        protected Vector3 _lastKnownTargetPosition;
         private float _lastSightTime;
         private float _lastSoundTime;
         private Vector3 _lastSoundPosition;
@@ -50,12 +50,12 @@ namespace ZONE.AI
         public delegate void StateChangedHandler(AIState newState, AIState oldState);
         public event StateChangedHandler OnStateChanged;
 
-        private void Awake()
+        protected virtual void Awake()
         {
             _agent = GetComponent<NavMeshAgent>();
         }
 
-        private void Update()
+        protected virtual void Update()
         {
             _sightTimer += Time.deltaTime;
 

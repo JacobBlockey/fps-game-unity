@@ -222,9 +222,9 @@ namespace ZONE.Factions
                     if (myStrength < enemyStrength && state.controlledZones.Count > 0)
                     {
                         float lossChance = (enemyStrength - myStrength) / 200f * deltaTime;
-                        if (Random.value < lossChance)
+                        if (UnityEngine.Random.value < lossChance)
                         {
-                            string contestedZone = state.controlledZones[Random.Range(0, state.controlledZones.Count)];
+                            string contestedZone = state.controlledZones[UnityEngine.Random.Range(0, state.controlledZones.Count)];
                             SetTerritoryOwner(contestedZone, enemy);
                             state.strength -= 5f;
                             _factionStates[enemy].strength += 5f;
