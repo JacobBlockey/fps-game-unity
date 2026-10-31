@@ -1,0 +1,29 @@
+# Unity .gitignore
+
+[Library/
+[Temp/
+[Obj/
+[Build/
+[Builds/
+[Logs/
+[MemoryCaptures/
+[PlaybackSettings.asset
+*.csproj
+*.unityproj
+*.sw9
+*.sln
+*.suo
+*.tmp
+*.user
+*.user_settings
+*.vmcs
+[.vs/
+.idea/
+.SX1000]
+\*.unityfiles
+\*.unityprefs
+\*.unity_cache
+\*.unity_cache_info
+
+# Asset-specific files to ignore (optional but recommended)
+[Assets/*\?\.meta]
