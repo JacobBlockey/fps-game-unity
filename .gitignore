@@ -64,3 +64,8 @@ exports/
 # Crash reports
 sysinfo.txt
 crashlytics-build.properties
+.vercel
+.env*
+
+# Vercel local config
+.vercel/
