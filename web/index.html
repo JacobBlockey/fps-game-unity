@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ZONE — The Fracture | Playable Build</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #0a0a0a;
+      color: #c0c0c0;
+      font-family: 'Courier New', monospace;
+      overflow: hidden;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    #gameContainer {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    #unityCanvas {
+      width: 100%;
+      height: 100%;
+      background: #000;
+      display: none;
+    }
+    #loadingScreen {
+      text-align: center;
+      z-index: 10;
+    }
+    #loadingScreen h1 {
+      font-size: 3rem;
+      color: #ff4444;
+      letter-spacing: 8px;
+      margin-bottom: 1rem;
+      text-shadow: 0 0 20px rgba(255, 68, 68, 0.5);
+    }
+    #loadingScreen p {
+      color: #666;
+      margin-bottom: 2rem;
+      font-size: 1.1rem;
+    }
+    .progress-bar {
+      width: 300px;
+      height: 4px;
+      background: #1a1a1a;
+      margin: 0 auto;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      width: 0%;
+      height: 100%;
+      background: linear-gradient(90deg, #ff4444, #ff6666);
+      transition: width 0.3s;
+    }
+    .status {
+      margin-top: 1rem;
+      color: #444;
+      font-size: 0.85rem;
+    }
+    .build-missing {
+      color: #ff6666;
+      margin-top: 2rem;
+      max-width: 500px;
+      line-height: 1.6;
+    }
+    .build-missing a {
+      color: #4488ff;
+    }
+  </style>
+</head>
+<body>
+  <div id="gameContainer">
+    <canvas id="unityCanvas"></canvas>
+    <div id="loadingScreen">
+      <h1>ZONE</h1>
+      <p>— The Fracture —</p>
+      <div id="buildStatus">
+        <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+        <div class="status" id="statusText">Checking for build...</div>
+      </div>
+      <div class="build-missing" id="buildMissing" style="display:none;">
+        <p><strong>No WebGL build found yet.</strong></p>
+        <p>The Unity WebGL build has not been generated. Once the Unity project is built, the output will be placed in <code>/Build/</code> and this page will load the game automatically.</p>
+        <p>Visit the <a href="/hub/index.html">project hub</a> for development status and the design document.</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const buildUrl = "/Build";
+    const config = {
+      dataUrl: `${buildUrl}/ZONE.data`,
+      frameworkUrl: `${buildUrl}/ZONE.framework.js`,
+      codeUrl: `${buildUrl}/ZONE.loader.js`,
+    };
+
+    const canvas = document.getElementById("unityCanvas");
+    const loadingScreen = document.getElementById("loadingScreen");
+    const progressFill = document.getElementById("progressFill");
+    const statusText = document.getElementById("statusText");
+    const buildMissing = document.getElementById("buildMissing");
+    const buildStatus = document.getElementById("buildStatus");
+
+    // Try to load the Unity build; if it doesn't exist, show placeholder
+    async function tryLoadBuild() {
+      try {
+        // Check if the loader script exists
+        const response = await fetch(config.codeUrl, { method: "HEAD" });
+        if (!response.ok) throw new Error("Build not found");
+        
+        statusText.textContent = "Loading Unity engine...";
+        
+        const script = document.createElement("script");
+        script.src = config.codeUrl;
+        script.onload = () => {
+          createUnityInstance(canvas, config, (progress) => {
+            progressFill.style.width = `${progress * 100}%`;
+            statusText.textContent = `Loading... ${Math.round(progress * 100)}%`;
+          }).then((unityInstance) => {
+            loadingScreen.style.display = "none";
+            canvas.style.display = "block";
+          }).catch((err) => {
+            statusText.textContent = "Failed to load build.";
+            console.error(err);
+          });
+        };
+        document.body.appendChild(script);
+      } catch (e) {
+        // Build not available — show placeholder
+        buildStatus.style.display = "none";
+        buildMissing.style.display = "block";
+      }
+    }
+
+    tryLoadBuild();
+  </script>
+</body>
+</html>

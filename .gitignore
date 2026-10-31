@@ -27,3 +27,8 @@
 
 # Asset-specific files to ignore (optional but recommended)
 [Assets/*\?\.meta]
+
+# Environment & secrets
+.env
+.env.local
+.env.*.local

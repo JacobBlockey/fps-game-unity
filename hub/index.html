@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ZONE — Project Hub</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg: #0a0a0a; --surface: #141414; --border: #2a2a2a;
+      --text: #c0c0c0; --text-dim: #555; --accent: #ff4444;
+      --accent-dim: #882222; --green: #44aa44; --yellow: #aaaa44;
+    }
+    body {
+      background: var(--bg); color: var(--text);
+      font-family: 'Segoe UI', 'Courier New', monospace;
+      line-height: 1.6;
+    }
+    .header {
+      border-bottom: 1px solid var(--border);
+      padding: 2rem 0; text-align: center;
+    }
+    .header h1 {
+      font-size: 2.5rem; color: var(--accent);
+      letter-spacing: 8px; font-weight: 300;
+    }
+    .header .subtitle {
+      color: var(--text-dim); margin-top: 0.5rem; font-size: 1rem;
+    }
+    .container { max-width: 1000px; margin: 0 auto; padding: 2rem 1rem; }
+    .section { margin-bottom: 3rem; }
+    .section h2 {
+      color: var(--accent); font-size: 1.3rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.5rem; margin-bottom: 1rem;
+      letter-spacing: 2px;
+    }
+    .status-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+    .status-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 4px; padding: 1rem 1.5rem;
+    }
+    .status-card .label { color: var(--text-dim); font-size: 0.8rem; text-transform: uppercase; }
+    .status-card .value { font-size: 1.5rem; margin-top: 0.3rem; color: var(--green); }
+    .status-card .value.building { color: var(--yellow); }
+    .status-card .value.pending { color: var(--text-dim); }
+    .phase-list { list-style: none; }
+    .phase-list li {
+      padding: 0.75rem 1rem; border-left: 3px solid var(--border);
+      margin-bottom: 0.5rem; background: var(--surface);
+      border-radius: 0 4px 4px 0;
+    }
+    .phase-list li.active { border-left-color: var(--accent); }
+    .phase-list li.done { border-left-color: var(--green); opacity: 0.6; }
+    .phase-list li .phase-name { font-weight: 600; }
+    .phase-list li .phase-desc { color: var(--text-dim); font-size: 0.85rem; margin-top: 0.2rem; }
+    .play-button {
+      display: inline-block; background: var(--accent); color: #fff;
+      padding: 0.75rem 2rem; border-radius: 4px; text-decoration: none;
+      font-weight: 600; letter-spacing: 1px; margin-top: 1rem;
+    }
+    .play-button:hover { background: #ff6666; }
+    .play-button.disabled { background: var(--border); color: var(--text-dim); pointer-events: none; }
+    .badge {
+      display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px;
+      font-size: 0.75rem; font-weight: 600; margin-left: 0.5rem;
+    }
+    .badge.active { background: var(--accent-dim); color: #fff; }
+    .badge.done { background: #1a3a1a; color: var(--green); }
+    .badge.pending { background: var(--border); color: var(--text-dim); }
+    .footer {
+      border-top: 1px solid var(--border); padding: 1rem;
+      text-align: center; color: var(--text-dim); font-size: 0.8rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>ZONE</h1>
+    <div class="subtitle">— The Fracture | Open-World FPS | Unity + Blender → Vercel —</div>
+  </div>
+
+  <div class="container">
+
+    <div class="section">
+      <h2>PROJECT STATUS</h2>
+      <div class="status-grid">
+        <div class="status-card">
+          <div class="label">Build Status</div>
+          <div class="value pending">No Build</div>
+        </div>
+        <div class="status-card">
+          <div class="label">Current Phase</div>
+          <div class="value building">Phase 0 — Foundation</div>
+        </div>
+        <div class="status-card">
+          <div class="label">Engine</div>
+          <div class="value" style="font-size: 1.2rem;">Unity 2022.3 LTS</div>
+        </div>
+        <div class="status-card">
+          <div class="label">Deployment</div>
+          <div class="value" style="font-size: 1.2rem;">Vercel (WebGL)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>PLAYABLE BUILD</h2>
+      <p>The Unity WebGL build will be available here once Phase 8 (WebGL Build & Vercel Deployment) is reached.</p>
+      <a href="/web/index.html" class="play-button disabled">PLAY GAME (Not Available)</a>
+    </div>
+
+    <div class="section">
+      <h2>DEVELOPMENT PHASES</h2>
+      <ul class="phase-list">
+        <li class="active">
+          <span class="phase-name">Phase 0 — Project Foundation <span class="badge active">IN PROGRESS</span></span>
+          <div class="phase-desc">Unity project setup, Git LFS, Blender pipeline, Vercel config, CI/CD</div>
+        </li>
+        <li>
+          <span class="phase-name">Phase 1 — Core Player Systems <span class="badge pending">PENDING</span></span>
+          <div class="phase-desc">Movement, stamina, health, inventory, input mapping</div>
+        </li>
+        <li>
+          <span class="phase-name">Phase 2 — Weapon & Combat Systems <span class="badge pending">PENDING</span></span>
+          <div class="phase-desc">Shooting, ballistics, melee, damage types, weapon condition</div>
+        </li>
+        <li>
+          <span class="phase-name">Phase 3 — AI & Monster Systems <span class="badge pending">PENDING</span></span>
+          <div class="phase-desc">7 monster species, AI perception, ecology, boss encounters</div>
+        </li>
+        <li>
+          <span class="phase-name">Phase 4 — Faction Systems <span class="badge pending">PENDING</span></span>
+          <div class="phase-desc">4 factions, reputation, territory control, faction warfare</div>
+        </li>
+        <li>
+          <span class="phase-name">Phase 5 — World Building <span class="badge pending">PENDING</span></span>
+          <div class="phase-desc">25km² terrain, 6 biomes, Blender assets, day/night, weather</div>
+        </li>
+        <li>
+          <span class="phase-name">Phase 6 — Gameplay Systems <span class="badge pending">PENDING</span></span>
+          <div class="phase-desc">Quests, crafting, trading, economy, skill trees, endings</div>
+        </li>
+        <li>
+          <span class="phase-name">Phase 7 — Audio & Polish <span class="badge pending">PENDING</span></span>
+          <div class="phase-desc">Sound design, music, particles, post-processing</div>
+        </li>
+        <li>
+          <span class="phase-name">Phase 8 — WebGL Build & Vercel <span class="badge pending">PENDING</span></span>
+          <div class="phase-desc">WebGL optimization, build pipeline, CI/CD deployment</div>
+        </li>
+        <li>
+          <span class="phase-name">Phase 9 — Beta & QA <span class="badge pending">PENDING</span></span>
+          <div class="phase-desc">Playtesting, bug fixing, balance, accessibility, launch</div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>KEY DOCUMENTS</h2>
+      <ul class="phase-list">
+        <li><span class="phase-name"><a href="https://github.com/JacobBlockey/fps-game-unity/blob/main/docs/GAME_DESIGN.md" target="_blank">Game Design Document</a></span></li>
+        <li><span class="phase-name"><a href="https://github.com/JacobBlockey/fps-game-unity/blob/main/docs/TASKS.md" target="_blank">Full Task Roadmap</a></span></li>
+        <li><span class="phase-name"><a href="https://github.com/JacobBlockey/fps-game-unity" target="_blank">GitHub Repository</a></span></li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    ZONE — The Fracture | Built with Unity & Blender | Deployed on Vercel
+  </div>
+</body>
+</html>
